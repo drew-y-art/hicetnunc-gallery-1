@@ -1,0 +1,91 @@
+body {
+	background-color: black;
+	margin-left: 0px;
+	margin-right: 10px;
+	font-size: 2em;
+}
+
+.header {
+	text-align: center;
+}
+
+#address {
+	width: 24em;
+	text-align: center;
+	padding: 0;
+}
+
+.navigation {
+    margin: 10px;
+    text-align: center;
+    color:  white;
+}
+
+input {
+	font-size: inherit;
+}
+
+.navigation > *, .header > *, #address {
+	color: white;
+    background: transparent;
+    border: 0;
+    font-family: "Century Gothic";
+    font-style: italic;
+    margin: 10px;
+}
+
+.navigation .prevPage, .navigation .nextPage {
+	border-color: gray;
+    border-width: 1px;
+    border-style: solid;
+    padding-left: 24px;
+    padding-right: 24px;
+    cursor: grab;
+}
+
+.navigation .pageNumber {
+	max-width: 2em;
+	text-align: right;
+	padding-right: 10px;
+}
+
+.navigation .pageNumber, #address {
+    border-color: darkgray;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px;
+}
+
+
+.navigation span {
+	cursor: default;
+}
+
+#content {
+	display: -webkit-flex;
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+#content .column {
+	width: 25%;
+	padding-left: 20px;
+	font-size: 0px;
+}
+
+.nft {
+	margin-bottom: 20px;
+	max-width: 100%;
+	background: #111;
+}
+
+iframe.nft {
+	width: 100%;
+	height: 100%;
+	border: 0;
+}
+
+model-viewer.nft, iframe.nft {
+	width: 100%;
+	height: 380px;
+}
