@@ -1,39 +1,71 @@
 function load() {
 	address = addressInput.value;
-	if (address && address.startsWith('tz')) {
-		var url = "https://api.hicdex.com/v1/graphql";
-		var payload = {
-			"query":"\nquery collectorGallery($address: String!) {\n  hic_et_nunc_token_holder(where: {holder_id: {_eq: $address}, token: {creator: {address: {_neq: $address}}}, quantity: {_gt: \"0\"}}, order_by: {token_id: desc}) {\n    token {\n      id\n      artifact_uri\n      display_uri\n      thumbnail_uri\n      timestamp\n      mime\n      title\n      description\n      supply\n      token_tags {\n        tag {\n          tag\n        }\n      }\n      creator {\n        address\n      }\n    }\n  }\n}\n",
-			"variables":{"address": address},
-			"operationName":"collectorGallery"
-		};
-		var xhr = new XMLHttpRequest();
-		xhr.open("POST", url, true);
-		xhr.setRequestHeader("Content-type", "text/plain;charset=UTF-8");
-		xhr.onreadystatechange = function() {
-		    if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-		    	response = JSON.parse(xhr.responseText);
-		    	console.log(response);
-		    	nfts = response['data']['hic_et_nunc_token_holder'];
-		    	pageNumber = 1;
-		    	pageCount = Math.ceil(nfts.length / MAX_PAGE_SIZE);
-		    	for (var i = 0; i < prevPageBtns.length; i++) {
-					prevPageBtns[i].onclick = showPrev;
-				}
-				for (var i = 0; i < nextPageBtns.length; i++) {
-					nextPageBtns[i].onclick = showNext;
-				}
-				for (var i = 0; i < pageNumberInputs.length; i++) {
-					pageNumberInputs[i].onchange = onPageNumberChanged;
-				}
-				for (var i = 0; i < pageCountLbls.length; i++) {
-					pageCountLbls[i].innerHTML = pageCount;
-				}
-		    	onHashChanged();
-		    }
+	if (address) {
+		if (address.startsWith('tz')) {
+			showCollectionForTezosAddress(address)
+		} else {
+			showCollectionForSubjkt(address)
 		}
-		xhr.send(JSON.stringify(payload));
+		
 	}
+}
+
+function showCollectionForSubjkt(subjkt) {
+	var url = "https://api.hicdex.com/v1/graphql";
+	var payload = {
+		"query":"\nquery subjktsQuery($subjkt: String!) {\n  hic_et_nunc_holder(where: { name: {_eq: $subjkt}}) {\n    address\n    name\n    hdao_balance\n    metadata\n  }\n}\n",
+		"variables": { "subjkt": address },
+		"operationName":"subjktsQuery"
+	};
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "text/plain;charset=UTF-8");
+	xhr.onreadystatechange = function() {
+	    if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+	    	response = JSON.parse(xhr.responseText);
+	    	console.log(response);
+	    	holder = response['data']['hic_et_nunc_holder'][0];
+	    	if (holder) {
+	    		showCollectionForTezosAddress(holder['address']);
+	    	}
+	    }
+	}
+	xhr.send(JSON.stringify(payload));
+}
+
+function showCollectionForTezosAddress(address) {
+	var url = "https://api.hicdex.com/v1/graphql";
+	var payload = {
+		"query":"\nquery collectorGallery($address: String!) {\n  hic_et_nunc_token_holder(where: {holder_id: {_eq: $address}, token: {creator: {address: {_neq: $address}}}, quantity: {_gt: \"0\"}}, order_by: {token_id: desc}) {\n    token {\n      id\n      artifact_uri\n      display_uri\n      thumbnail_uri\n      timestamp\n      mime\n      title\n      description\n      supply\n      token_tags {\n        tag {\n          tag\n        }\n      }\n      creator {\n        address\n      }\n    }\n  }\n}\n",
+		"variables": { "address": address },
+		"operationName":"collectorGallery"
+	};
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "text/plain;charset=UTF-8");
+	xhr.onreadystatechange = function() {
+	    if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+	    	response = JSON.parse(xhr.responseText);
+	    	console.log(response);
+	    	nfts = response['data']['hic_et_nunc_token_holder'];
+	    	pageNumber = 1;
+	    	pageCount = Math.ceil(nfts.length / MAX_PAGE_SIZE);
+	    	for (var i = 0; i < prevPageBtns.length; i++) {
+				prevPageBtns[i].onclick = showPrev;
+			}
+			for (var i = 0; i < nextPageBtns.length; i++) {
+				nextPageBtns[i].onclick = showNext;
+			}
+			for (var i = 0; i < pageNumberInputs.length; i++) {
+				pageNumberInputs[i].onchange = onPageNumberChanged;
+			}
+			for (var i = 0; i < pageCountLbls.length; i++) {
+				pageCountLbls[i].innerHTML = pageCount;
+			}
+	    	onHashChanged();
+	    }
+	}
+	xhr.send(JSON.stringify(payload));
 }
 
 document.addEventListener("DOMContentLoaded", ready);
