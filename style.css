@@ -25,7 +25,7 @@ input {
 	font-size: inherit;
 }
 
-.navigation > *, .header > *, #address {
+.navigation > *, .header > *, #address, #summary {
 	color: white;
     background: transparent;
     border: 0;
@@ -71,6 +71,24 @@ input {
 	width: 25%;
 	padding-left: 20px;
 	font-size: 0px;
+}
+
+#content .column .creator-widget {
+	font-size: 14pt;
+	display: block;
+	text-align: center;
+	margin: 40px;
+	color: lightgrey;
+}
+
+#summary {
+	color: lightgrey;
+	text-align: center;
+}
+
+.creator-widget img {
+	border-radius: 100%;
+	border: 2px solid rgb(222, 222, 222);
 }
 
 .nft {
