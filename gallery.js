@@ -138,7 +138,7 @@ function createImage(token, artifactId, posterId) {
 	}
 	var img = document.createElement("img");
 	img.classList.add('nft');
-	img.setAttribute('src', "https://ipfs.io/ipfs/" + id);
+	img.setAttribute('src', "https://cloudflare-ipfs.com/ipfs/" + id);
 	//img.addEventListener('error', retrySrcLoad);
 	return img;
 }
@@ -148,32 +148,30 @@ function createIFrame(artifactId, posterId) {
 	id = artifactId || posterId;
 	var ifr = document.createElement("iframe");
 	ifr.classList.add('nft');
-	ifr.setAttribute('src', "https://ipfs.io/ipfs/" + id);
+	ifr.setAttribute('src', "https://cloudflare-ipfs.com/ipfs/" + id);
 	div.appendChild(ifr);
 	return div;
 }
 
 function createVideo(artifactId, posterId) {
-	// <video class="styles_video__32uJf" playsinline="" loop="" src="https://ipfs.io/ipfs/QmWrmdEUez4j5CehR1rZ9yGqoEvzHgxAdUCcMJmVKFAdMG" poster="" autoplay=""></video>
 	var vid = document.createElement("video");
 	vid.classList.add('nft');
 	vid.setAttribute('playsinline', '');
 	vid.setAttribute('loop', '');
 	vid.muted = true;
-	vid.setAttribute('src', 'https://ipfs.io/ipfs/' + artifactId);
-	vid.setAttribute('poster', posterId ? ('https://ipfs.io/ipfs/' + posterId) : '');
+	vid.setAttribute('src', 'https://cloudflare-ipfs.com/ipfs/' + artifactId);
+	vid.setAttribute('poster', posterId ? ('https://cloudflare-ipfs.com/ipfs/' + posterId) : '');
 	vid.setAttribute('autoplay', '');
 	//vid.addEventListener('error', retrySrcLoad);
 	return vid;
 }
 
 function createModelViewer(artifactId, posterId) {
-	//<model-viewer src="https://ipfs.io/ipfs/QmRdUbVLdbNXtqgZKTLWxCswfPyASdLb2e3wHTNujFRqTy" autoplay="true" auto-rotate="true" data-js-focus-visible="true" interaction-prompt="none" ar-status="not-presenting" style="width: 376.5px; height: 376.5px;"><button slot="ar-button" class="styles_arButton__lU3m5">AR</button></model-viewer>
 	var mv = document.createElement("model-viewer");
 	mv.classList.add('nft');
 	mv.setAttribute('camera-controls', '');
-	mv.setAttribute('poster', posterId ? ('https://ipfs.io/ipfs/' + posterId) : '');
-	mv.setAttribute('src', 'https://ipfs.io/ipfs/' + artifactId);
+	mv.setAttribute('poster', posterId ? ('https://cloudflare-ipfs.com/ipfs/' + posterId) : '');
+	mv.setAttribute('src', 'https://cloudflare-ipfs.com/ipfs/' + artifactId);
 	mv.setAttribute('autoplay', 'true');
 	mv.setAttribute('auto-rotate', 'true');
 	mv.setAttribute('data-js-focus-visible', 'true');
@@ -185,7 +183,7 @@ function createModelViewer(artifactId, posterId) {
 function createApplication(artifactId, posterId) {
 	var img = document.createElement("img");
 	img.classList.add('nft');
-	img.setAttribute('src', "https://ipfs.io/ipfs/" + posterId);
+	img.setAttribute('src', "https://cloudflare-ipfs.com/ipfs/" + posterId);
 	//img.addEventListener('error', retrySrcLoad);
 	return img;
 }
