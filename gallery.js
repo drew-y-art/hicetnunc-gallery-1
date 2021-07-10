@@ -158,8 +158,9 @@ function createVideo(artifactId, posterId) {
 	vid.classList.add('nft');
 	vid.setAttribute('playsinline', '');
 	vid.setAttribute('loop', '');
+	vid.setAttribute('controls', '');
 	vid.muted = true;
-	vid.setAttribute('src', 'https://cloudflare-ipfs.com/ipfs/' + artifactId);
+	vid.setAttribute('src', 'https://ipfs.io/ipfs/' + artifactId);
 	vid.setAttribute('poster', posterId ? ('https://cloudflare-ipfs.com/ipfs/' + posterId) : '');
 	vid.setAttribute('autoplay', '');
 	//vid.addEventListener('error', retrySrcLoad);
